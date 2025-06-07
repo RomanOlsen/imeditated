@@ -13,6 +13,7 @@ import { computed, onMounted } from 'vue';
 const account = computed(() => AppState.account);
 const sessionToday = computed(() => AppState.sessionToday);
 const sessions = computed(() => AppState.sessions);
+const streak = computed(() => AppState.streak);
 
 async function markSession() {
   try {
@@ -72,7 +73,7 @@ async function getSessionsForAccount() {
 
 
     <div class="text-center fs-5">
-      <div>You have meditated for <span class="fw-bold">{{ sessions }}</span> days in a row!</div>
+      <div>You have meditated for <span class="fw-bold">{{ streak }}</span> days in a row!</div>
       <div>And a total of <span class="fw-bold">{{ sessions.length }}</span> times.</div>
     </div>
   </div>

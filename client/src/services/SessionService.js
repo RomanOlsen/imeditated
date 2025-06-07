@@ -11,6 +11,8 @@ class SessionService {
     AppState.sessions = response.data.map(pojo => new Session(pojo)) // add to appstate
 
     this.checkForSessionToday() // disable button if session already exists today
+    AppState.streak = this.calculateStreak(AppState.sessions.map(s => s.localDate)) // calculate streak for display
+
   }
 
   checkForSessionToday() { // a setInterval will also check this, but we want to check on load
@@ -27,9 +29,31 @@ class SessionService {
     const response = await api.post('api/sessions', {localDate: new Date().toLocaleDateString('en-CA')}) // later send a session object or just add more once we begin implementing duration, method, etc. // en-CA for consistency
     logger.log(response.data)
   }
+// NOTE chatgpt wrote this, so I dont fully understand this part of my code yet.
+calculateStreak(dates) {
+  if (!dates.length) return 0;
 
-calculateSessionStreak(){
-  
+  // Sort the dates in descending order (latest first)
+  const sortedDates = dates
+    .map(date => new Date(date))
+    .sort((a, b) => b - a);
+
+  let streak = 1;
+  let previous = sortedDates[0];
+
+  for (let i = 1; i < sortedDates.length; i++) {
+    const current = sortedDates[i];
+    const diffInDays = Math.round((previous - current) / (1000 * 60 * 60 * 24));
+
+    if (diffInDays === 1) {
+      streak++;
+      previous = current;
+    } else if (diffInDays > 1) {
+      break; // streak broken
+    }
+  }
+
+  return streak;
 }
 
 }

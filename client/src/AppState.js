@@ -8,5 +8,6 @@ export const AppState = reactive({
   account: null,
   sessions: [],
   sessionToday: null, // true if a session has been marked today, false if loaded but none exists
+  streak: 0
 })
 
