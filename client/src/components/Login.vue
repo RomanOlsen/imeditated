@@ -18,6 +18,7 @@ function logout() {
 function usePlaceholderImage() {
   logger.warn('Failed to load user image, using placeholder instead.')
   failed = true
+  document.getElementById("accountPicture").classList.add("d-none");
 }
 
 </script>
@@ -33,8 +34,8 @@ function usePlaceholderImage() {
         <div role="button" class="selectable-scale no-select" data-bs-toggle="dropdown" aria-expanded="false"
           title="open account menu">
           <div v-if="account?.picture || identity?.picture">
-            <img :src="account?.picture || identity?.picture" alt="account photo" height="40" class="user-img"
-              @error="usePlaceholderImage()" />
+            <img id="accountPicture" :src="account?.picture || identity?.picture" alt="account photo" height="40"
+              class="user-img" @error="usePlaceholderImage()" />
 
             <img v-if="failed" src="https://wallpapersok.com/images/hd/basic-default-pfp-pxi77qv5o0zuz8j3.jpg"
               alt="New account photo" height="40" class="user-img" />

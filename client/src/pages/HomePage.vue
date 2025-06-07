@@ -1,5 +1,16 @@
 <script setup>
+import { sessionService } from '@/services/SessionService.js';
+import { Pop } from '@/utils/Pop.js';
 
+
+async function markSession() {
+  try {
+    await sessionService.markSession();
+  }
+  catch (error) {
+    Pop.error("Could not log meditation.", error);
+  }
+}
 
 </script>
 
@@ -14,9 +25,10 @@
         </p> -->
   <div class="d-flex justify-content-center align-items-center flex-grow-1 flex-column gap-4">
 
-    <button class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg  mt-5">Mark complete</button>
-        <!-- <button class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg mt-5" disabled>Completed!</button> -->
-         <!-- ANCHOR example of the completed state. -->
+    <button @click="markSession()" class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg  mt-5">Mark
+      complete</button>
+    <!-- <button class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg mt-5" disabled>Completed!</button> -->
+    <!-- ANCHOR example of the completed state. -->
 
     <div class="text-center fs-5">
       <div>You have meditated for 0 days in a row!</div>
