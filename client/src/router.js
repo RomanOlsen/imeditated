@@ -16,6 +16,12 @@ const routes = [
     name: 'About',
     component: loadPage('AboutPage')
   },
+   {
+    path: '/history',
+    name: 'History',
+    component: loadPage('HistoryPage'),
+    beforeEnter: authGuard
+  },
   {
     path: '/account',
     name: 'Account',

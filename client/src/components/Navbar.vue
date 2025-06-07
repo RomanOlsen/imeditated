@@ -19,7 +19,7 @@ watch(theme, () => {
 <template>
   <nav class="navbar navbar-expand-md bg-none border-bottom border-5 border-imeditated">
     <div class="container-fluid gap-2">
-      <!-- <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-light"> -->
+      <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-light">
       <!-- NOTE we might need routerLink later here. -->
       <div class="d-flex align-items-center">
 
@@ -28,7 +28,7 @@ watch(theme, () => {
         <small class="text-dark">by Roman Olsen</small>
       </div>
 
-      <!-- </RouterLink> -->
+      </RouterLink>
       <!-- collapse button -->
       <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-links"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">

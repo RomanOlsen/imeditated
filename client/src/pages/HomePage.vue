@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import CreateSessionModal from '@/components/CreateSessionModal.vue';
 import { sessionService } from '@/services/SessionService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
@@ -69,10 +70,14 @@ async function getSessionsForAccount() {
     <button v-if="!sessionToday" id="markButton" @click="markSession()"
       class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg  mt-5">Mark
       complete</button>
-    <div v-else>
-      <div class="text-center">Well done, {{ account.name }} 🎉</div>
+    <div v-else class="text-center">
+      <div>Well done today, {{ account.name }} 🎉</div>
+      <!-- <div class="position-relative"> -->
+      <!-- NOTE delete button - will for now just have the option to remove sessions in account settings page -->
+      <!-- <button class="delete mdi mdi-undo bg-danger"></button> -->
       <button class="btn selectable-scale btn-success text-light fs-1 shadow btn-lg mt-4" disabled>Completed.
       </button>
+      <!-- </div> -->
     </div>
 
     <!-- ANCHOR example of the completed state. -->
@@ -95,7 +100,7 @@ async function getSessionsForAccount() {
 
   </div> -->
 
-
+  <CreateSessionModal />
 </template>
 
 <style scoped lang="scss">
@@ -107,5 +112,10 @@ async function getSessionsForAccount() {
 
 .button-row {
   height: 100%;
+}
+
+.delete {
+  position: absolute;
+  top: 1;
 }
 </style>

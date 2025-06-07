@@ -48,7 +48,12 @@ function usePlaceholderImage() {
           <div class="list-group">
             <RouterLink :to="{ name: 'Account' }">
               <div class="list-group-item dropdown-item list-group-item-action">
-                Manage Account
+                Account Settings
+              </div>
+            </RouterLink>
+            <RouterLink :to="{ name: 'History' }">
+              <div class="list-group-item dropdown-item list-group-item-action">
+                History
               </div>
             </RouterLink>
             <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" @click="logout">
