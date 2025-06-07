@@ -1,11 +1,24 @@
 <script setup>
 import { sessionService } from '@/services/SessionService.js';
 import { Pop } from '@/utils/Pop.js';
-
+import confetti from 'canvas-confetti';
 
 async function markSession() {
   try {
-    await sessionService.markSession();
+    // await sessionService.markSession();
+
+    // // @ts-ignore
+    // window.confetti({
+    //   particleCount: 200,
+    //   spread: 70,
+    //   origin: { x: 0.5, y: 0.5 },
+    //   colors: ['#ff9a9e', '#fad0c4', '#fad0c4', '#ff9a9e']
+    // });
+    confetti({
+      particleCount: 75,
+      spread: 90,
+    });
+
   }
   catch (error) {
     Pop.error("Could not log meditation.", error);
