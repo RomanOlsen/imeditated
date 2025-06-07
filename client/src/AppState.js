@@ -6,6 +6,7 @@ export const AppState = reactive({
   identity: null,
   /** @type {import('./models/Account.js').Account} user info from the database*/
   account: null,
-  
+  sessions: [],
+  sessionToday: null, // true if a session has been marked today, false if loaded but none exists
 })
 

@@ -11,6 +11,8 @@ import { computed, onMounted } from 'vue';
 // })
 
 const account = computed(() => AppState.account);
+const sessionToday = computed(() => AppState.sessionToday);
+const sessions = computed(() => AppState.sessions);
 
 async function markSession() {
   try {
@@ -59,17 +61,19 @@ async function getSessionsForAccount() {
   <!-- <p class="lead text-center mb-5">
           A simple meditation timer for your mindfulness practice.
         </p> -->
-  <div v-if="account" class="d-flex justify-content-center align-items-center flex-grow-1 flex-column gap-4">
+  <div v-if="account && sessionToday !== null" class="d-flex justify-content-center align-items-center flex-grow-1 flex-column gap-4">
 
-    <button id="markButton" @click="markSession()"
+    <!-- <div v-if="sessionToday === null">Loading...</div> -->
+    <button v-if="!sessionToday" id="markButton" @click="markSession()"
       class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg  mt-5">Mark
       complete</button>
-    <!-- <button class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg mt-5" disabled>Completed!</button> -->
+    <button v-else class="btn selectable-scale btn-success text-light fs-1 shadow btn-lg mt-5" disabled>Completed.</button>
     <!-- ANCHOR example of the completed state. -->
 
+
     <div class="text-center fs-5">
-      <div>You have meditated for <span class="fw-bold">{{ 0 }}</span> days in a row!</div>
-      <div>And a total of <span class="fw-bold">{{ 0 }}</span> times.</div>
+      <div>You have meditated for <span class="fw-bold">{{ sessions }}</span> days in a row!</div>
+      <div>And a total of <span class="fw-bold">{{ sessions.length }}</span> times.</div>
     </div>
   </div>
   <div v-else>
