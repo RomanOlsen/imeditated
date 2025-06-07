@@ -4,13 +4,13 @@ import { RouterView } from 'vue-router';
 
 </script>
 
-<template>
+<template class="imeditated-gray">
   <header>
   </header>
-  <main class="imeditated-gray">
+  <main>
     <RouterView/>
   </main>
-  <footer class=" text-center">
+  <footer class="text-center">
     <Navbar />
     <!-- Made with <i class="mdi mdi-heart text-pink"></i> by CodeWorks -->
   </footer>

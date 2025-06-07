@@ -17,36 +17,37 @@ watch(theme, () => {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-md bg-imeditated-navbar border-bottom border-imeditated">
-    <div class="container gap-2">
+  <nav class="navbar navbar-expand-md bg-none border-bottom border-5 border-imeditated">
+    <div class="container-fluid gap-2">
       <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-light">
-        <img class="navbar-brand" alt="logo" src="@/assets/img/I meditated.com (600 x 600 px).png" height="45" />
-        <b class="fs-5">I Meditated</b>
+        <img class="navbar-brand btn btn-outline-dark" alt="logo"
+          src="@/assets/img/I meditated.com (600 x 600 px) (1).png" height="50" />
+        <!-- <b class="fs-5">I Meditated</b> -->
       </RouterLink>
       <!-- collapse button -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-links"
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-links"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="mdi mdi-menu text-light"></span>
-      </button>
+      </button> -->
       <!-- collapsing menu -->
-      <div class="collapse navbar-collapse " id="navbar-links">
-        <!-- <ul class="navbar-nav">
+      <!-- <div class="collapse navbar-collapse " id="navbar-links"> -->
+      <!-- <ul class="navbar-nav">
           <li>
             <RouterLink :to="{ name: 'About' }" class="btn text-imeditated selectable">
               About
             </RouterLink>
           </li>
         </ul> -->
-        <!-- LOGIN COMPONENT HERE -->
-        <div class="ms-auto">
-          <!-- <button class="btn text-light" @click="toggleTheme"
+      <!-- LOGIN COMPONENT HERE -->
+      <!-- <div class="ms-auto"> -->
+      <!-- <button class="btn text-light" @click="toggleTheme"
             :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
             <i v-if="theme == 'dark'" class="mdi mdi-weather-sunny"></i>
             <i v-if="theme == 'light'" class="mdi mdi-weather-night"></i>
           </button> -->
-        </div>
-        <Login />
-      </div>
+      <!-- </div> -->
+      <Login />
+      <!-- </div> -->
     </div>
   </nav>
 </template>
