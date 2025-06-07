@@ -62,19 +62,26 @@ async function getSessionsForAccount() {
   <!-- <p class="lead text-center mb-5">
           A simple meditation timer for your mindfulness practice.
         </p> -->
-  <div v-if="account && sessionToday !== null" class="d-flex justify-content-center align-items-center flex-grow-1 flex-column gap-4">
+  <div v-if="account && sessionToday !== null"
+    class="d-flex justify-content-center align-items-center flex-grow-1 flex-column gap-4">
 
     <!-- <div v-if="sessionToday === null">Loading...</div> -->
     <button v-if="!sessionToday" id="markButton" @click="markSession()"
       class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg  mt-5">Mark
       complete</button>
-    <button v-else class="btn selectable-scale btn-success text-light fs-1 shadow btn-lg mt-5" disabled>Completed.</button>
+    <div v-else>
+      <div class="text-center">Well done, {{ account.name }} 🎉</div>
+      <button class="btn selectable-scale btn-success text-light fs-1 shadow btn-lg mt-4" disabled>Completed.
+      </button>
+    </div>
+
     <!-- ANCHOR example of the completed state. -->
 
 
     <div class="text-center fs-5">
       <div>You have meditated for <span class="fw-bold">{{ streak }}</span> days in a row!</div>
       <div>And a total of <span class="fw-bold">{{ sessions.length }}</span> times.</div>
+
     </div>
   </div>
   <div v-else>

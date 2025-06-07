@@ -2,6 +2,7 @@ import { logger } from "@/utils/Logger.js"
 import { api } from "./AxiosService.js"
 import { AppState } from "@/AppState.js"
 import { Session } from "@/models/Session.js"
+import App from "@/App.vue"
 
 class SessionService {
   async getSessionsForAccount() {
@@ -28,6 +29,10 @@ class SessionService {
 
     const response = await api.post('api/sessions', {localDate: new Date().toLocaleDateString('en-CA')}) // later send a session object or just add more once we begin implementing duration, method, etc. // en-CA for consistency
     logger.log(response.data)
+    AppState.sessions.push(new Session(response.data))
+
+    AppState.streak = this.calculateStreak(AppState.sessions.map(s => s.localDate))
+
   }
 // NOTE chatgpt wrote this, so I dont fully understand this part of my code yet.
 calculateStreak(dates) {
