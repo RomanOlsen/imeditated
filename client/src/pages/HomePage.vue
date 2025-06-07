@@ -1,13 +1,16 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { sessionService } from '@/services/SessionService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
 import confetti from 'canvas-confetti';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 
 // onMounted(() => { // NOTE look at github commit message on what to do
 //   getSessionsForAccount();
 // })
+
+const account = computed(() => AppState.account);
 
 async function markSession() {
   try {
@@ -31,7 +34,7 @@ async function markSession() {
 
   }
   catch (error) {
-    Pop.error("Could not log meditation.", error);
+    Pop.error(error, "Could not log meditation.");
     logger.error(error, "Error marking session");
   }
 }
@@ -56,7 +59,7 @@ async function getSessionsForAccount() {
   <!-- <p class="lead text-center mb-5">
           A simple meditation timer for your mindfulness practice.
         </p> -->
-  <div class="d-flex justify-content-center align-items-center flex-grow-1 flex-column gap-4">
+  <div v-if="account" class="d-flex justify-content-center align-items-center flex-grow-1 flex-column gap-4">
 
     <button id="markButton" @click="markSession()"
       class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg  mt-5">Mark
@@ -68,6 +71,9 @@ async function getSessionsForAccount() {
       <div>You have meditated for <span class="fw-bold">{{ 0 }}</span> days in a row!</div>
       <div>And a total of <span class="fw-bold">{{ 0 }}</span> times.</div>
     </div>
+  </div>
+  <div v-else>
+    <h1> Log in to meditate!</h1>
   </div>
   <!-- </div>
     </div>
@@ -85,7 +91,7 @@ async function getSessionsForAccount() {
   height: 80dvh;
   // background: url('@/assets/img/meditation-background.jpg') no-repeat center center fixed;
   // background-size: cover;
-} 
+}
 
 .button-row {
   height: 100%;

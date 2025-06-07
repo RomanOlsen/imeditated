@@ -1,12 +1,13 @@
 import { dbContext } from "../db/DbContext.js"
 
 class SessionService {
-  getSessionsForAccount(id) {
-    throw new Error("Method not implemented.")
+  async getSessionsForAccount(id) {
+    const sessions = await dbContext.Session.find({ accountId: id }) //.populate('account', 'name email')
+    return sessions
   }
   async markSession(sessionData) {
-    
-// TODO backend logic to check if session already exists for the day.
+
+    // TODO backend logic to check if session already exists for the day.
     // const existingSession = await dbContext.Session.findOne({
     //   accountId: sessionData.accountId,
     //   date: sessionData.date
