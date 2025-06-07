@@ -14,7 +14,7 @@
         </p> -->
         <div class="d-flex justify-content-center align-items-center flex-grow-1">
 
-          <button class="btn btn-imeditated text-light fs-1">I meditated?</button>
+          <button class="btn btn-imeditated text-light fs-1 shadow">I meditated?</button>
         </div>
       <!-- </div>
     </div>

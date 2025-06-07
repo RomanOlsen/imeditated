@@ -19,11 +19,16 @@ watch(theme, () => {
 <template>
   <nav class="navbar navbar-expand-md bg-none border-bottom border-5 border-imeditated">
     <div class="container-fluid gap-2">
-      <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-light">
-        <img class="navbar-brand btn btn-outline-dark" alt="logo"
-          src="@/assets/img/I meditated.com (600 x 600 px) (1).png" height="50" />
-        <!-- <b class="fs-5">I Meditated</b> -->
-      </RouterLink>
+      <!-- <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-light"> -->
+      <!-- NOTE we might need routerLink later here. -->
+      <div class="d-flex align-items-center">
+
+        <img class="navbar-brand btn-outline-dark" alt="logo" src="@/assets/img/I meditated.com (600 x 600 px) (1).png"
+          height="55" />
+        <small class="text-dark">by Roman Olsen</small>
+      </div>
+
+      <!-- </RouterLink> -->
       <!-- collapse button -->
       <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-links"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
