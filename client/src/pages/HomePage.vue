@@ -1,16 +1,17 @@
 <script setup>
 import { sessionService } from '@/services/SessionService.js';
+import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
 import confetti from 'canvas-confetti';
 import { onMounted } from 'vue';
 
-onMounted(() => {
-  getSessionsForAccount();
-})
+// onMounted(() => { // NOTE look at github commit message on what to do
+//   getSessionsForAccount();
+// })
 
 async function markSession() {
   try {
-    // await sessionService.markSession();
+    await sessionService.markSession();
     confetti({
       particleCount: 20,
       spread: 90,
@@ -31,6 +32,7 @@ async function markSession() {
   }
   catch (error) {
     Pop.error("Could not log meditation.", error);
+    logger.error(error, "Error marking session");
   }
 }
 

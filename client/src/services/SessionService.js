@@ -7,10 +7,9 @@ class SessionService {
     logger.log(response.data)
   }
   async markSession() {
-
-    const response = await api.post('api/sessions')
-    logger.log(response.data)
-
+    // sessionData.date = new Date().toLocaleDateString('en-US') // en-ca is more consistent?
+    const response = await api.post('api/sessions', {localDate: new Date().toLocaleDateString('en-CA')}) // later send a session object or just add more once we begin implementing duration, method, etc.
+    logger.log(response.data) 
   }
 
 }
