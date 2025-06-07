@@ -7,7 +7,7 @@ import { RouterView } from 'vue-router';
 <template>
   <header>
   </header>
-  <main>
+  <main class="imeditated-gray">
     <RouterView/>
   </main>
   <footer class=" text-center">
@@ -18,5 +18,8 @@ import { RouterView } from 'vue-router';
 
 <style lang="scss">
 
-
+.imeditated-gray {
+  background-color: #f8f9faa8; /* Light gray background */
+  // min-height: 100vh; /* Ensure it covers the full viewport height */
+}
 </style>

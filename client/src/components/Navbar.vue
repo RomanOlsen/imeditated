@@ -5,9 +5,9 @@ import Login from './Login.vue';
 
 const theme = ref(loadState('theme') || 'light')
 
-function toggleTheme() {
-  theme.value = theme.value == 'light' ? 'dark' : 'light'
-}
+// function toggleTheme() {
+//   theme.value = theme.value == 'light' ? 'dark' : 'light'
+// }
 
 watch(theme, () => {
   document.documentElement.setAttribute('data-bs-theme', theme.value)
@@ -17,7 +17,7 @@ watch(theme, () => {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-md bg-codeworks border-bottom border-imeditated">
+  <nav class="navbar navbar-expand-md bg-imeditated-navbar border-bottom border-imeditated">
     <div class="container gap-2">
       <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-light">
         <img class="navbar-brand" alt="logo" src="@/assets/img/I meditated.com (600 x 600 px).png" height="45" />
@@ -30,20 +30,20 @@ watch(theme, () => {
       </button>
       <!-- collapsing menu -->
       <div class="collapse navbar-collapse " id="navbar-links">
-        <ul class="navbar-nav">
+        <!-- <ul class="navbar-nav">
           <li>
             <RouterLink :to="{ name: 'About' }" class="btn text-imeditated selectable">
               About
             </RouterLink>
           </li>
-        </ul>
+        </ul> -->
         <!-- LOGIN COMPONENT HERE -->
         <div class="ms-auto">
-          <button class="btn text-light" @click="toggleTheme"
+          <!-- <button class="btn text-light" @click="toggleTheme"
             :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
             <i v-if="theme == 'dark'" class="mdi mdi-weather-sunny"></i>
             <i v-if="theme == 'light'" class="mdi mdi-weather-night"></i>
-          </button>
+          </button> -->
         </div>
         <Login />
       </div>
