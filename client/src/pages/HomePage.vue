@@ -2,22 +2,31 @@
 import { sessionService } from '@/services/SessionService.js';
 import { Pop } from '@/utils/Pop.js';
 import confetti from 'canvas-confetti';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  getSessionsForAccount();
+})
 
 async function markSession() {
   try {
     // await sessionService.markSession();
-
-    // // @ts-ignore
-    // window.confetti({
-    //   particleCount: 200,
-    //   spread: 70,
-    //   origin: { x: 0.5, y: 0.5 },
-    //   colors: ['#ff9a9e', '#fad0c4', '#fad0c4', '#ff9a9e']
-    // });
     confetti({
-      particleCount: 75,
+      particleCount: 20,
       spread: 90,
+      // origin: { x: 0.5, y: 0.5 }
     });
+
+    const button = document.getElementById('markButton')
+
+    button.classList.remove('btn-imeditated');
+    button.classList.add('btn-success');
+    button.innerText = 'Completed.';
+
+    // @ts-ignore
+    button.disabled = true;
+
+
 
   }
   catch (error) {
@@ -25,6 +34,15 @@ async function markSession() {
   }
 }
 
+
+async function getSessionsForAccount() {
+  try {
+    await sessionService.getSessionsForAccount()
+  }
+  catch (error) {
+    Pop.error("Could not fetch session data for account", error);
+  }
+}
 </script>
 
 <template>
@@ -38,14 +56,15 @@ async function markSession() {
         </p> -->
   <div class="d-flex justify-content-center align-items-center flex-grow-1 flex-column gap-4">
 
-    <button @click="markSession()" class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg  mt-5">Mark
+    <button id="markButton" @click="markSession()"
+      class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg  mt-5">Mark
       complete</button>
     <!-- <button class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg mt-5" disabled>Completed!</button> -->
     <!-- ANCHOR example of the completed state. -->
 
     <div class="text-center fs-5">
-      <div>You have meditated for 0 days in a row!</div>
-      <div>And a total of 0 times.</div>
+      <div>You have meditated for <span class="fw-bold">{{ 0 }}</span> days in a row!</div>
+      <div>And a total of <span class="fw-bold">{{ 0 }}</span> times.</div>
     </div>
   </div>
   <!-- </div>
@@ -64,7 +83,7 @@ async function markSession() {
   height: 80dvh;
   // background: url('@/assets/img/meditation-background.jpg') no-repeat center center fixed;
   // background-size: cover;
-}
+} 
 
 .button-row {
   height: 100%;

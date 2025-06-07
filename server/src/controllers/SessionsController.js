@@ -6,9 +6,19 @@ export class SessionsController extends BaseController {
   constructor() {
     super('api/sessions')
     this.router
-    // add auth0 info here
+      // add auth0 info here
       .use(Auth0Provider.getAuthorizedUserInfo)
+      .get('', this.getSessionsForAccount)
       .post('', this.markSession)
+  }
+  async getSessionsForAccount(request, response, next) {  
+    try {
+      const sessions = await sessionService.getSessionsForAccount(request.userInfo.id)
+      response.send(sessions)
+    }
+    catch (error) {
+      next(error)
+    }
   }
 
   async markSession(request, response, next) {
