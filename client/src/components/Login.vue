@@ -2,9 +2,11 @@
 import { computed } from 'vue';
 import { AppState } from '../AppState.js';
 import { AuthService } from '../services/AuthService.js';
+import { logger } from '@/utils/Logger.js';
 
 const identity = computed(() => AppState.identity)
 const account = computed(() => AppState.account)
+let failed = false
 
 function login() {
   AuthService.loginWithRedirect()
@@ -13,20 +15,33 @@ function logout() {
   AuthService.logout()
 }
 
+function usePlaceholderImage() {
+  logger.warn('Failed to load user image, using placeholder instead.')
+  failed = true
+}
+
 </script>
 
 <template>
+  <!-- NOTE selectable -- now using selectable-scale instead -->
   <span class="navbar-text">
-    <button class="btn selectable text-imeditated btn-outline-dark" @click="login" v-if="!identity">
+    <button class="btn selectable-scale text-imeditated btn-outline-dark" @click="login" v-if="!identity">
       Login
     </button>
     <div v-else>
       <div class="dropdown dropup">
-        <div role="button" class="bg-dark selectable no-select" data-bs-toggle="dropdown" aria-expanded="false"
+        <div role="button" class="selectable-scale no-select" data-bs-toggle="dropdown" aria-expanded="false"
           title="open account menu">
           <div v-if="account?.picture || identity?.picture">
-            <img :src="account?.picture || identity?.picture" alt="account photo" height="40" class="user-img" />
+            <img :src="account?.picture || identity?.picture" alt="account photo" height="40" class="user-img"
+              @error="usePlaceholderImage()" />
+
+            <img v-if="failed" src="https://wallpapersok.com/images/hd/basic-default-pfp-pxi77qv5o0zuz8j3.jpg"
+              alt="New account photo" height="40" class="user-img" />
+
           </div>
+          <!-- <div class="text-light"><span>Logged in as {{ account?.name }}</span></div> -->
+
         </div>
         <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-end p-0" role="menu" title="account menu">
           <div class="list-group">
@@ -48,6 +63,8 @@ function logout() {
 
 <style lang="scss" scoped>
 .user-img {
+  // height: 3rem;
+  // width: 3rem;
   height: 40px;
   width: 40px;
   border-radius: 100px;
