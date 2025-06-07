@@ -1,4 +1,10 @@
 <script setup>
+import { AppState } from '@/AppState.js';
+import { computed } from 'vue';
+
+const activeSession = computed(() =>
+  AppState.activeSession
+);
 
 </script>
 
@@ -9,7 +15,14 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{ new
+            Date(activeSession.localDate).toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              timeZone: 'UTC'
+            }) }}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -25,6 +38,4 @@
 </template>
 
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

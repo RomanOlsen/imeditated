@@ -6,7 +6,9 @@ import App from "@/App.vue"
 
 class SessionService {
   setActiveSession(id) {
-    throw new Error('Method not implemented.')
+    const session = AppState.sessions.find(s => s.id == id)
+    AppState.activeSession = session
+    logger.log('Active Session Set:', AppState.activeSession)
   }
   async getSessionsForAccount() {
     const response = await api.get('api/sessions')

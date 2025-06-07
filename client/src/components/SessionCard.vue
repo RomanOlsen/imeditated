@@ -1,6 +1,5 @@
 <script setup>
 import { Session } from '@/models/Session.js';
-import EditSessionModal from './EditSessionModal.vue';
 import { Pop } from '@/utils/Pop.js';
 import { sessionService } from '@/services/SessionService.js';
 
@@ -21,7 +20,7 @@ catch (error){
 
 
 <template>
-  <div @click="setActiveSession()" class="card d-flex align" type="button" data-bs-toggle="modal" data-bs-target="#editSessionModal">
+  <div @click="setActiveSession()" class="card" type="button" data-bs-toggle="modal" data-bs-target="#editSessionModal">
     <!-- <img class="img-fluid"
       src="https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?q=80&w=2093&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       alt="Meditation session image"> -->
