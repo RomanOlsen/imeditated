@@ -12,9 +12,13 @@
         <!-- <p class="lead text-center mb-5">
           A simple meditation timer for your mindfulness practice.
         </p> -->
-        <div class="d-flex justify-content-center align-items-center flex-grow-1">
+        <div class="d-flex justify-content-center align-items-center flex-grow-1 flex-column gap-4">
 
-          <button class="btn btn-imeditated text-light fs-1 shadow">I meditated?</button>
+          <button class="btn btn-imeditated text-light fs-1 shadow mt-5">I meditated?</button>
+          <div class="text-center fs-5">
+            <div>You have meditated for X days in a row!</div>
+            <div>And a total of X times.</div>
+          </div>
         </div>
       <!-- </div>
     </div>
