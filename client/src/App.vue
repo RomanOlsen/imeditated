@@ -6,13 +6,13 @@ import { RouterView } from 'vue-router';
 
 <template>
   <header>
-    <Navbar />
   </header>
   <main>
     <RouterView/>
   </main>
   <footer class=" text-center">
-    Made with <i class="mdi mdi-heart text-pink"></i> by CodeWorks
+    <Navbar />
+    <!-- Made with <i class="mdi mdi-heart text-pink"></i> by CodeWorks -->
   </footer>
 </template>
 
