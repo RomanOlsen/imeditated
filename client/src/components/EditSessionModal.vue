@@ -7,6 +7,9 @@ import { computed, ref } from 'vue';
 const activeSession = computed(() =>
   AppState.activeSession
 );
+const editMode = computed(() =>
+  AppState.editMode
+);
 
 async function deleteActiveSession() {
   try {
@@ -31,7 +34,9 @@ const newSessionData = ref({
 
 async function updateActiveSession() {
   try {
+    this.toggleEditMode()
     await sessionService.updateActiveSession(activeSession.value.id, newSessionData.value)
+    sessionService.setActiveSession(activeSession.value.id); // refresh active session
     Pop.success("Session updated successfully.");
   }
   catch (error) {
@@ -39,11 +44,14 @@ async function updateActiveSession() {
   }
 }
 
+function toggleEditMode() {
+  AppState.editMode = !AppState.editMode;
+}
+
 </script>
 
 
 <template>
-  <!-- Modal -->
   <div class="modal fade" id="editSessionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -58,47 +66,82 @@ async function updateActiveSession() {
             }) }}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-floating">
-              <select v-model="newSessionData.method" class="form-select mb-3" id="floatingSelectInput"
-                aria-label="Select a method">
-                <option selected value="None specified">None specified</option>
-                <option value="Silent">Silent</option>
-                <option value="Group/Class">Group/Class</option>
-                <option value="App - Calm">App - Calm</option>
-                <option value="App - Headspace">App - Headspace</option>
-                <option value="App - Insight Timer">App - Insight Timer</option>
-                <option value="App - Medito">App - Medito</option>
-                <option value="Other app or guided video/audio">Other app or guided video/audio</option>
+
+        <!-- SECTION EDIT MODE FIRST -->
+        <div v-if="editMode">
 
 
-              </select>
-              <label for="floatingSelect">Method:</label>
-            </div>
-            <!-- <div>Duration: {{ activeSession.duration }} minutes</div> -->
-            <!-- <input type="number"> -->
-            <div class="form-floating mb-3">
-              <input v-model="newSessionData.duration" type="number" class="form-control" id="floatingDurationInput"
-               >
-              <label for="floatingDurationInput">Duration: (minutes)</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input v-model="newSessionData.note" type="text" class="form-control" id="floatingNoteInput"
-                >
-              <label for="floatingNoteInput">Note:</label>
-            </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-floating">
+                <select v-model="newSessionData.method" class="form-select mb-3" id="floatingSelectInput"
+                  aria-label="Select a method">
+                  <option selected value="None specified">None specified</option>
+                  <option value="Silent">Silent</option>
+                  <option value="Group/Class">Group/Class</option>
+                  <option value="App - Calm">App - Calm</option>
+                  <option value="App - Headspace">App - Headspace</option>
+                  <option value="App - Insight Timer">App - Insight Timer</option>
+                  <option value="App - Medito">App - Medito</option>
+                  <option value="Other app or guided video/audio">Other app or guided video/audio</option>
 
 
-          </form>
+                </select>
+                <label for="floatingSelect">Method:</label>
+              </div>
+              <!-- <div>Duration: {{ activeSession.duration }} minutes</div> -->
+              <!-- <input type="number"> -->
+              <div class="form-floating mb-3">
+                <input v-model="newSessionData.duration" type="number" max="1440" class="form-control"
+                  id="floatingDurationInput">
+                <label for="floatingDurationInput">Duration: (minutes)</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input v-model="newSessionData.note" type="text" class="form-control" id="floatingNoteInput"
+                  maxlength="150">
+                <label for="floatingNoteInput">Note:</label>
+              </div>
+
+
+            </form>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+            <button @click="deleteActiveSession()" type="button" class="btn btn-danger"
+              data-bs-dismiss="modal">Delete</button>
+              <div class="gap-2 d-flex">
+
+                <button @click="toggleEditMode()" type="button" class="btn btn-gray text-light">Go Back</button>
+                <button @click="updateActiveSession()" type="button" class="btn btn-success text-light" data-bs-dismiss="modal">Save
+                  changes</button>
+              </div>
+          </div>
         </div>
-        <div class="modal-footer d-flex justify-content-between">
-          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-          <button @click="deleteActiveSession()" type="button" class="btn btn-danger"
-            data-bs-dismiss="modal">Delete</button>
-          <button @click="updateActiveSession()" type="button" class="btn btn-success text-light"
-            data-bs-dismiss="modal">Save changes</button>
+        <!-- !SECTION EDIT MODE-->
+        <!-- SECTION VIEW MODE -->
+        <div v-else>
+
+          <div class="modal-body">
+            <div class="mb-3">I meditated in the form of <span class="fw-bold">{{ activeSession?.method || "None specified"
+                }}</span> for
+              <span class="fw-bold"> {{
+                activeSession?.duration }}</span> minutes.
+            </div>
+            <div v-if="activeSession?.note" class="">
+              Note: "{{ activeSession?.note}}"
+            </div>
+          </div>
+
+          <div class="modal-footer d-flex justify-content-center">
+            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+            <!-- <button @click="deleteActiveSession()" type="button" class="btn btn-danger"
+              data-bs-dismiss="modal">Delete</button> -->
+            <button @click="toggleEditMode()" type="button" class="btn btn-imeditated text-light">Edit</button>
+          </div>
         </div>
+
+        <!-- !SECTION -->
+
       </div>
     </div>
   </div>

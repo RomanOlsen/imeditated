@@ -1,8 +1,9 @@
 import { AppState } from "@/AppState.js"
 
  class ActiveSessionService {
-   changeValuesOnForm() {
+   changeValuesOnForm() { // NOT IN USE
     const session = AppState.activeSession
+    // @ts-ignore
     document.getElementById('floatingSelectInput').value = session.method
     // @ts-ignore
     document.getElementById('floatingDurationInput').value = session.duration

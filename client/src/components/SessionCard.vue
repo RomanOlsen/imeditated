@@ -11,7 +11,7 @@ const prop = defineProps({
 async function setActiveSession() {
 try {
   await sessionService.setActiveSession(prop.session.id);
-  activeSessionService.changeValuesOnForm()
+  // activeSessionService.changeValuesOnForm()
 }
 catch (error){
   Pop.error(error);

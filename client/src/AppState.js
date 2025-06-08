@@ -9,6 +9,7 @@ export const AppState = reactive({
   sessions: [],
   sessionToday: null, // true if a session has been marked today, false if loaded but none exists
   streak: 0,
-  activeSession: null // the session being opened in the editSessionModal
+  activeSession: null, // the session being opened in the editSessionModal
+  editMode: false, // true if the edit session modal is open
 })
 
