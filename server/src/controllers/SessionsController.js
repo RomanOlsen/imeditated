@@ -11,8 +11,20 @@ export class SessionsController extends BaseController {
       .get('', this.getSessionsForAccount)
       .post('', this.markSession)
       .delete('/:id', this.deleteActiveSession)
+      .put('/:id', this.updateActiveSession)
   }
-  deleteActiveSession(request, response, next) {
+  async updateActiveSession(request, response, next) {
+    try {
+      const userInfo = request.userInfo
+      const id = request.params.id
+      const newSessionData = request.body
+      const session = await sessionService.updateActiveSession(id, userInfo, newSessionData)
+      response.send(session)
+    } catch (error) {
+      next(error)
+    }
+  }
+  async deleteActiveSession(request, response, next) {
     try {
       const userInfo = request.userInfo
       const id = request.params.id

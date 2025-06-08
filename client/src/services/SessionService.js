@@ -5,6 +5,12 @@ import { Session } from "@/models/Session.js"
 import App from "@/App.vue"
 
 class SessionService {
+  async updateActiveSession(id, newSessionData) {
+    const response = await api.put(`api/sessions/${id}`, newSessionData)
+    logger.log(response.data)
+    const index = AppState.sessions.findIndex(s => s.id == id)
+    AppState.sessions.splice(index, 1, new Session(response.data)) // replace the session in appstate with the updated one
+  }
   async deleteActiveSession(id) {
     const response = await api.delete(`api/sessions/${id}`)
     logger.log(response.data)
@@ -45,7 +51,7 @@ class SessionService {
     AppState.streak = this.calculateStreak(AppState.sessions.map(s => s.localDate))
 
   }
-// NOTE chatgpt wrote this, so I dont fully understand this part of my code yet.
+// NOTE chatgpt wrote this, so I dont fully understand this part of code yet.
 calculateStreak(dates) {
   if (!dates.length) return 0;
 

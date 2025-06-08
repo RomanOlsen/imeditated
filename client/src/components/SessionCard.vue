@@ -2,6 +2,7 @@
 import { Session } from '@/models/Session.js';
 import { Pop } from '@/utils/Pop.js';
 import { sessionService } from '@/services/SessionService.js';
+import { activeSessionService } from '@/services/ActiveSessionService.js';
 
 const prop = defineProps({
   session: { type: Session, required: true }
@@ -10,6 +11,7 @@ const prop = defineProps({
 async function setActiveSession() {
 try {
   await sessionService.setActiveSession(prop.session.id);
+  activeSessionService.changeValuesOnForm()
 }
 catch (error){
   Pop.error(error);

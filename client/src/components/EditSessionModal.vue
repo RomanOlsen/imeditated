@@ -2,7 +2,7 @@
 import { AppState } from '@/AppState.js';
 import { sessionService } from '@/services/SessionService.js';
 import { Pop } from '@/utils/Pop.js';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const activeSession = computed(() =>
   AppState.activeSession
@@ -17,6 +17,22 @@ async function deleteActiveSession() {
 
     await sessionService.deleteActiveSession(activeSession.value.id);
     Pop.success("Session deleted successfully.");
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
+
+const newSessionData = ref({
+  method: activeSession.value?.method,
+  duration: activeSession.value?.duration,
+  note: activeSession.value?.note
+})
+
+async function updateActiveSession() {
+  try {
+    await sessionService.updateActiveSession(activeSession.value.id, newSessionData.value)
+    Pop.success("Session updated successfully.");
   }
   catch (error) {
     Pop.error(error);
@@ -45,15 +61,16 @@ async function deleteActiveSession() {
         <div class="modal-body">
           <form>
             <div class="form-floating">
-              <select class="form-select mb-3" id="floatingSelect" aria-label="Select a method">
-                <option selected>None specified</option>
-                <option value="1">Silent</option>
-                <option value="6">Group/Class</option>
-                <option value="2">App - Calm</option>
-                <option value="3">App - Headspace</option>
-                <option value="4">App - Insight Timer</option>
-                <option value="4">App - Medito</option>
-                <option value="5">Other app or guided video/audio</option>
+              <select v-model="newSessionData.method" class="form-select mb-3" id="floatingSelectInput"
+                aria-label="Select a method">
+                <option selected value="None specified">None specified</option>
+                <option value="Silent">Silent</option>
+                <option value="Group/Class">Group/Class</option>
+                <option value="App - Calm">App - Calm</option>
+                <option value="App - Headspace">App - Headspace</option>
+                <option value="App - Insight Timer">App - Insight Timer</option>
+                <option value="App - Medito">App - Medito</option>
+                <option value="Other app or guided video/audio">Other app or guided video/audio</option>
 
 
               </select>
@@ -62,11 +79,13 @@ async function deleteActiveSession() {
             <!-- <div>Duration: {{ activeSession.duration }} minutes</div> -->
             <!-- <input type="number"> -->
             <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="floatingDurationInput" placeholder="name@example.com">
+              <input v-model="newSessionData.duration" type="number" class="form-control" id="floatingDurationInput"
+               >
               <label for="floatingDurationInput">Duration: (minutes)</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="floatingNoteInput" placeholder="name@example.com">
+              <input v-model="newSessionData.note" type="text" class="form-control" id="floatingNoteInput"
+                >
               <label for="floatingNoteInput">Note:</label>
             </div>
 
@@ -75,8 +94,10 @@ async function deleteActiveSession() {
         </div>
         <div class="modal-footer d-flex justify-content-between">
           <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-          <button @click="deleteActiveSession()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
-          <button type="button" class="btn btn-success text-light">Save changes</button>
+          <button @click="deleteActiveSession()" type="button" class="btn btn-danger"
+            data-bs-dismiss="modal">Delete</button>
+          <button @click="updateActiveSession()" type="button" class="btn btn-success text-light"
+            data-bs-dismiss="modal">Save changes</button>
         </div>
       </div>
     </div>

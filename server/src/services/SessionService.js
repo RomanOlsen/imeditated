@@ -2,6 +2,23 @@ import { dbContext } from "../db/DbContext.js"
 import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class SessionService {
+
+  async updateActiveSession(id, userInfo, newSessionData) {
+    const foundSession = await this.findSessionById(id)
+    if (foundSession == null) {
+      throw new BadRequest("Invalid Session ID")
+    }
+    if (foundSession.accountId != userInfo.id) {
+      throw new Forbidden("You do not have permission to update this session")
+    }
+    foundSession.method = newSessionData.method || foundSession.method
+    foundSession.duration = newSessionData.duration || foundSession.duration
+    foundSession.note = newSessionData.note || foundSession.note
+    await foundSession.save()
+    return foundSession
+
+  }
+
   async deleteActiveSession(id, userInfo) {
     const foundSession = await this.findSessionById(id)
     if (foundSession == null) {
