@@ -5,6 +5,12 @@ import { Session } from "@/models/Session.js"
 import App from "@/App.vue"
 
 class SessionService {
+  async deleteActiveSession(id) {
+    const response = await api.delete(`api/sessions/${id}`)
+    logger.log(response.data)
+    const index = AppState.sessions.findIndex(s => s.id == id)
+    AppState.sessions.splice(index, 1) // remove from appstate
+  }
   setActiveSession(id) {
     const session = AppState.sessions.find(s => s.id == id)
     AppState.activeSession = session
