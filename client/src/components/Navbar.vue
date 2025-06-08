@@ -19,7 +19,7 @@ watch(theme, () => {
 <template>
   <nav class="navbar navbar-expand-md bg-none border-bottom border-5 border-imeditated">
     <div class="container-fluid gap-2">
-      <RouterLink :to="{ name: 'Home' }" class="btn border-dark d-flex align-items-center text-light" title="Go to homepage">
+      <RouterLink :to="{ name: 'Home' }" class="btn p-0 px-2 border-gray d-flex align-items-center text-light" title="Go to homepage">
       <!-- NOTE we might need routerLink later here. -->
       <div class="d-flex align-items-center">
 
