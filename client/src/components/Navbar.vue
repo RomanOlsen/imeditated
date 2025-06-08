@@ -19,7 +19,7 @@ watch(theme, () => {
 <template>
   <nav class="navbar navbar-expand-md bg-none border-bottom border-5 border-imeditated">
     <div class="container-fluid gap-2">
-      <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-light">
+      <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-light" title="Go to homepage">
       <!-- NOTE we might need routerLink later here. -->
       <div class="d-flex align-items-center">
 
@@ -36,13 +36,14 @@ watch(theme, () => {
       </button> -->
       <!-- collapsing menu -->
       <!-- <div class="collapse navbar-collapse " id="navbar-links"> -->
-      <!-- <ul class="navbar-nav">
+      <ul class="navbar-nav d-flex align-items-center gap-2">
           <li>
             <RouterLink :to="{ name: 'About' }" class="btn text-imeditated selectable">
-              About
+              History
             </RouterLink>
           </li>
-        </ul> -->
+          <Login />
+        </ul>
       <!-- LOGIN COMPONENT HERE -->
       <!-- <div class="ms-auto"> -->
       <!-- <button class="btn text-light" @click="toggleTheme"
@@ -51,7 +52,6 @@ watch(theme, () => {
             <i v-if="theme == 'light'" class="mdi mdi-weather-night"></i>
           </button> -->
       <!-- </div> -->
-      <Login />
       <!-- </div> -->
     </div>
   </nav>

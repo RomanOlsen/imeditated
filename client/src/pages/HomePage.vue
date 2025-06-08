@@ -57,7 +57,7 @@ async function checkSessionsInAppstate() {
   try {
     await sessionService.checkSessionsInAppState();
   }
-  catch (error){
+  catch (error) {
     Pop.error(error);
   }
 }
@@ -98,9 +98,22 @@ async function checkSessionsInAppstate() {
 
     </div>
   </div>
-  <div v-else>
-    <h1> Log in to meditate!</h1>
+
+  <div v-else class="d-flex align-items-center flex-grow-1 justify-content-center flex-column">
+           <RouterLink :to="{ name: 'About' }" class="btn text-imeditated selectable">
+              About
+            </RouterLink>
+    <h1 class="d-flex mt-5"> Log in to meditate! <span class="mdi mdi-arrow-bottom-right mt-5"></span></h1>
+    <!-- <img class="arrow img-fluid" src="@/assets/img/arrow2.png" alt=""> -->
   </div>
+
+    <!-- <div v-else class="d-flex align-items-center flex-grow-1 justify-content-center">
+    <h1 class="d-flex "> Log in to meditate!</h1>
+    <img class="arrow img-fluid" src="@/assets/img/arrow2.png" alt="">
+  </div> -->
+
+
+
   <!-- </div>
     </div>
     <div class="col-12 d-flex justify-content-center">
@@ -126,5 +139,10 @@ async function checkSessionsInAppstate() {
 .delete {
   position: absolute;
   top: 1;
+}
+
+.arrow {
+  rotate: 55deg;
+  // max-width: 100dvh;
 }
 </style>
