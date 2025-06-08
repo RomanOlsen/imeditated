@@ -93,12 +93,12 @@ function toggleEditMode() {
               <!-- <input type="number"> -->
               <div class="form-floating mb-3">
                 <input v-model="newSessionData.duration" type="number" max="1440" class="form-control"
-                  id="floatingDurationInput">
+                placeholder=""  id="floatingDurationInput">
                 <label for="floatingDurationInput">Duration: (minutes)</label>
               </div>
               <div class="form-floating mb-3">
                 <input v-model="newSessionData.note" type="text" class="form-control" id="floatingNoteInput"
-                  maxlength="150">
+                 placeholder="" maxlength="150">
                 <label for="floatingNoteInput">Note:</label>
               </div>
 
@@ -112,7 +112,7 @@ function toggleEditMode() {
               <div class="gap-2 d-flex">
 
                 <button @click="toggleEditMode()" type="button" class="btn btn-gray text-light">Go Back</button>
-                <button @click="updateActiveSession()" type="button" class="btn btn-success text-light" data-bs-dismiss="modal">Save
+                <button @click="updateActiveSession()" type="button" class="btn btn-success text-light">Save
                   changes</button>
               </div>
           </div>

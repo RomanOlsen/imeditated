@@ -5,6 +5,13 @@ import { Session } from "@/models/Session.js"
 import App from "@/App.vue"
 
 class SessionService {
+  checkSessionsInAppState() { // only for onMounted on HomePage to make it more reactive? This likely will be trashed later.
+        this.checkForSessionToday() // disable button if session already exists today
+    AppState.streak = this.calculateStreak(AppState.sessions.map(s => s.localDate)) // calculate streak for display
+  }
+
+
+
   async updateActiveSession(id, newSessionData) {
     const response = await api.put(`api/sessions/${id}`, newSessionData)
     logger.log(response.data)

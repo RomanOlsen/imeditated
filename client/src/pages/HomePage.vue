@@ -7,9 +7,9 @@ import { Pop } from '@/utils/Pop.js';
 import confetti from 'canvas-confetti';
 import { computed, onMounted } from 'vue';
 
-// onMounted(() => { // NOTE look at github commit message on what to do
-//   getSessionsForAccount();
-// })
+onMounted(() => { // NOTE look at github commit message on what to do
+  checkSessionsInAppstate();
+})
 
 const account = computed(() => AppState.account);
 const sessionToday = computed(() => AppState.sessionToday);
@@ -50,6 +50,15 @@ async function getSessionsForAccount() {
   }
   catch (error) {
     Pop.error("Could not fetch session data for account", error);
+  }
+}
+
+async function checkSessionsInAppstate() {
+  try {
+    await sessionService.checkSessionsInAppState();
+  }
+  catch (error){
+    Pop.error(error);
   }
 }
 </script>
