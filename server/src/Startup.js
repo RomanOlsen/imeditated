@@ -35,7 +35,7 @@ export class Startup {
   }
 
   static get corsOptions() {
-    const allowedDomains = []
+    const allowedDomains = ['https://imeditated.com', 'https://imeditated.vercel.app']
     const corsOptions = {
       origin(origin, callback) {
         if (process.env.NODE_ENV === 'dev' || !origin) {
