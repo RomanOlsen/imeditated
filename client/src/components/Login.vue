@@ -40,6 +40,7 @@ function usePlaceholderImage() {
             <img v-if="failed" src="@/assets/img/basicPFP.jpg"
               alt="New account photo" height="40" class="user-img" />
               <!-- <Small v-else>{{ account?.name }}</Small> -->
+               <!-- NOTE we will need to ask Jake and codeworks about this problem. -->
 
           </div>
           <!-- <div class="text-light"><span>Logged in as {{ account?.name }}</span></div> -->

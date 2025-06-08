@@ -24,6 +24,7 @@ async function createPreviousSession(params) {
   try {
     // logger.log(disabledDates.value)
     await sessionService.createPreviousSession(createPreviousSessionData.value, date.value)
+    Pop.success("Session added.");
   }
   catch (error) {
     Pop.error(error);
@@ -81,7 +82,7 @@ async function createPreviousSession(params) {
             </div>
 
             <!-- <button type="button" class="btn btn-gray text-light">Go Back</button> -->
-            <button type="submit" class="btn btn-success text-light mdi mdi-check w-100"> Mark</button>
+            <button type="submit" class="btn btn-success text-light mdi mdi-check w-100" data-bs-dismiss="modal"> Mark</button>
 
           </form>
           </div>

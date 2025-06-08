@@ -5,8 +5,14 @@ import { Session } from "@/models/Session.js"
 import App from "@/App.vue"
 
 class SessionService {
-  async createPreviousSession(createPreviousSessionDataValue, dateValue) {
-    const response = await api.post('api/sessions', createPreviousSessionDataValue)
+  async createPreviousSession(formValues, dateValue) {
+    const response = await api.post('api/sessions', {method: formValues.method, duration: formValues.duration, note: formValues.note, localDate: new Date(dateValue).toLocaleDateString('en-CA') })
+    logger.log(response.data)
+        AppState.sessions.push(new Session(response.data))
+
+        // @ts-ignore
+        AppState.sessions.sort((a, b) => new Date(b.localDate) - new Date(a.localDate)) // sort by date descending (AI written)
+
   }
 
   checkSessionsInAppState() { // only for onMounted on HomePage to make it more reactive? This likely will be trashed later.
@@ -42,6 +48,9 @@ class SessionService {
     this.checkForSessionToday() // disable button if session already exists today
     AppState.streak = this.calculateStreak(AppState.sessions.map(s => s.localDate)) // calculate streak for display
 
+    // @ts-ignore
+    AppState.sessions.sort((a, b) => new Date(b.localDate) - new Date(a.localDate))
+
   }
 
   checkForSessionToday() { // a setInterval will also check this, but we want to check on load
@@ -57,7 +66,7 @@ class SessionService {
 
     const response = await api.post('api/sessions', {localDate: new Date().toLocaleDateString('en-CA')}) // later send a session object or just add more once we begin implementing duration, method, etc. // en-CA for consistency
     logger.log(response.data)
-    AppState.sessions.push(new Session(response.data))
+    AppState.sessions.unshift(new Session(response.data)) // used to be push, but we want it at the top of the list
 
     AppState.streak = this.calculateStreak(AppState.sessions.map(s => s.localDate))
 
