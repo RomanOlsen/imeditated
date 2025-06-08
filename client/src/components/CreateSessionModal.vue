@@ -1,15 +1,29 @@
 <script setup>
+import { sessionService } from '@/services/SessionService.js';
+import { Pop } from '@/utils/Pop.js';
 import { ref } from 'vue';
 
+// Import VueDatePicker for date selection
+import VueDatePicker from '@vuepic/vue-datepicker'; 
+import '@vuepic/vue-datepicker/dist/main.css'
 
-const createNewSessionData = ref({
+const date = ref();
+
+
+const createPreviousSessionData = ref({
   method: "None specified",
   duration: 0,
-  note: ""
+  note: "",
+  localDate: null
 })
 
-function createPastSession(params) {
-  
+async function createPreviousSession(params) {
+  try {
+    await sessionService.createPreviousSession(createPreviousSessionData.value)
+  }
+  catch (error) {
+    Pop.error(error);
+  }
 }
 
 </script>
@@ -32,7 +46,7 @@ function createPastSession(params) {
         <div class="modal-body">
           <form>
             <div class="form-floating">
-              <select v-model="createNewSessionData.method" class="form-select mb-3" id="floatingSelectInput"
+              <select v-model="createPreviousSessionData.method" class="form-select mb-3" id="floatingSelectInput"
                 aria-label="Select a method">
                 <option selected value="None specified">None specified</option>
                 <option value="Silent">Silent</option>
@@ -50,12 +64,12 @@ function createPastSession(params) {
             <!-- <div>Duration: {{ activeSession.duration }} minutes</div> -->
             <!-- <input type="number"> -->
             <div class="form-floating mb-3">
-              <input v-model="createNewSessionData.duration" type="number" max="1440" class="form-control"
+              <input v-model="createPreviousSessionData.duration" type="number" max="1440" class="form-control"
                 placeholder="" id="floatingDurationInput">
               <label for="floatingDurationInput">Duration: (minutes)</label>
             </div>
             <div class="form-floating mb-3">
-              <input v-model="createNewSessionData.note" type="text" class="form-control" id="floatingNoteInput"
+              <input v-model="createPreviousSessionData.note" type="text" class="form-control" id="floatingNoteInput"
                 placeholder="" maxlength="150">
               <label for="floatingNoteInput">Note:</label>
             </div>
@@ -65,11 +79,11 @@ function createPastSession(params) {
         </div>
         <div class="modal-footer d-flex justify-content-between">
           <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-    
+
           <div class="gap-2 d-flex">
 
             <!-- <button type="button" class="btn btn-gray text-light">Go Back</button> -->
-            <button @click="createPastSession()" type="button" class="btn btn-success text-light">Save
+            <button @click="createPreviousSession()" type="button" class="btn btn-success text-light">Save
               changes</button>
           </div>
         </div>
@@ -77,7 +91,7 @@ function createPastSession(params) {
     </div>
   </div>
 
-
+<VueDatePicker v-model="date"></VueDatePicker>
 </template>
 
 

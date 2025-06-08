@@ -13,6 +13,7 @@
     "@bcwdev/auth0provider-client": "0.1.12",
     "@mdi/font": "7.4.47",
     "@popperjs/core": "2.11.8",
+    "@vuepic/vue-datepicker": "^11.0.2",
     "axios": "1.7.4",
     "bootstrap": "5.3.3",
     "canvas-confetti": "^1.9.3",
