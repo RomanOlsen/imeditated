@@ -4,13 +4,14 @@ import { Pop } from '@/utils/Pop.js';
 import { computed, ref } from 'vue';
 
 // Import VueDatePicker for date selection
-import VueDatePicker from '@vuepic/vue-datepicker'; 
+import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { AppState } from '@/AppState.js';
+import confetti from 'canvas-confetti';
 
 const date = ref();
 
-const disabledDates = computed(()=> AppState.sessions.map(s => s.localDate));
+const disabledDates = computed(() => AppState.sessions.map(s => s.localDate));
 
 
 const createPreviousSessionData = ref({
@@ -25,6 +26,11 @@ async function createPreviousSession(params) {
     // logger.log(disabledDates.value)
     await sessionService.createPreviousSession(createPreviousSessionData.value, date.value)
     Pop.success("Session added.");
+    confetti({
+      particleCount: 15,
+      spread: 360,
+      // origin: { x: 0.5, y: 0.5 }
+    });
   }
   catch (error) {
     Pop.error(error);
@@ -51,7 +57,8 @@ async function createPreviousSession(params) {
         <div class="modal-body">
           <form @submit.prevent="createPreviousSession" class="needs-validation" novalidate>
             <!-- :action-row="{ showNow: true }" -->
-            <VueDatePicker v-model="date" required :enable-time-picker="false"  placeholder="Select Date" :max-date="new Date()" :disabled-dates="disabledDates" timezone="UTC" class="mb-3"></VueDatePicker>
+            <VueDatePicker v-model="date" required :enable-time-picker="false" placeholder="Select Date"
+              :max-date="new Date()" :disabled-dates="disabledDates" timezone="UTC" class="mb-3"></VueDatePicker>
             <div class="form-floating">
               <select v-model="createPreviousSessionData.method" class="form-select mb-3" id="floatingSelectInput"
                 aria-label="Select a method">
@@ -82,11 +89,12 @@ async function createPreviousSession(params) {
             </div>
 
             <!-- <button type="button" class="btn btn-gray text-light">Go Back</button> -->
-            <button type="submit" class="btn btn-success text-light mdi mdi-check w-100" data-bs-dismiss="modal"> Mark</button>
+            <button type="submit" class="btn btn-success text-light mdi mdi-check w-100" data-bs-dismiss="modal">
+              Mark</button>
 
           </form>
-          </div>
-          <!-- <div class="modal-footer d-flex justify-content-between">
+        </div>
+        <!-- <div class="modal-footer d-flex justify-content-between">
 
             
             <div class="gap-2 d-flex">
