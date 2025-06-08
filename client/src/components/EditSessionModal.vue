@@ -27,16 +27,16 @@ async function deleteActiveSession() {
 }
 
 const newSessionData = ref({
-  method: activeSession.value?.method,
-  duration: activeSession.value?.duration,
-  note: activeSession.value?.note
+  method: activeSession.value?.method || "None specified",
+  duration: activeSession.value?.duration || 0,
+  note: activeSession.value?.note || ""
 })
 
 async function updateActiveSession() {
   try {
-    this.toggleEditMode()
     await sessionService.updateActiveSession(activeSession.value.id, newSessionData.value)
     sessionService.setActiveSession(activeSession.value.id); // refresh active session
+    this.toggleEditMode()
     Pop.success("Session updated successfully.");
   }
   catch (error) {
@@ -45,8 +45,18 @@ async function updateActiveSession() {
 }
 
 function toggleEditMode() {
+  resetNewSessionData();
   AppState.editMode = !AppState.editMode;
 }
+
+function resetNewSessionData() { // chatgpt
+  newSessionData.value = {
+    method: activeSession.value?.method || "None specified",
+    duration: activeSession.value?.duration || 0,
+    note: activeSession.value?.note || ""
+  }
+}
+
 
 </script>
 

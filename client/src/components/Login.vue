@@ -37,8 +37,9 @@ function usePlaceholderImage() {
             <img id="accountPicture" :src="account?.picture || identity?.picture" alt="account photo" height="40"
               class="user-img" @error="usePlaceholderImage()" />
 
-            <img v-if="failed" src="https://wallpapersok.com/images/hd/basic-default-pfp-pxi77qv5o0zuz8j3.jpg"
+            <img v-if="failed" src="@/assets/img/basicPFP.jpg"
               alt="New account photo" height="40" class="user-img" />
+              <Small v-else>{{ account?.name }}</Small>
 
           </div>
           <!-- <div class="text-light"><span>Logged in as {{ account?.name }}</span></div> -->
