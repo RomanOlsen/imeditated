@@ -5,7 +5,7 @@ import { Session } from "@/models/Session.js"
 import App from "@/App.vue"
 
 class SessionService {
-  async createPreviousSession(createPreviousSessionDataValue) {
+  async createPreviousSession(createPreviousSessionDataValue, dateValue) {
     const response = await api.post('api/sessions', createPreviousSessionDataValue)
   }
 

@@ -1,25 +1,29 @@
 <script setup>
 import { sessionService } from '@/services/SessionService.js';
 import { Pop } from '@/utils/Pop.js';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 // Import VueDatePicker for date selection
 import VueDatePicker from '@vuepic/vue-datepicker'; 
 import '@vuepic/vue-datepicker/dist/main.css'
+import { AppState } from '@/AppState.js';
 
 const date = ref();
+
+const disabledDates = computed(()=> AppState.sessions.map(s => s.localDate));
 
 
 const createPreviousSessionData = ref({
   method: "None specified",
   duration: 0,
   note: "",
-  localDate: null
+  // localDate: null
 })
 
 async function createPreviousSession(params) {
   try {
-    await sessionService.createPreviousSession(createPreviousSessionData.value)
+    // logger.log(disabledDates.value)
+    await sessionService.createPreviousSession(createPreviousSessionData.value, date.value)
   }
   catch (error) {
     Pop.error(error);
@@ -39,12 +43,14 @@ async function createPreviousSession(params) {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <!-- SECTION EDIT MODE FIRST -->
+
 
 
 
         <div class="modal-body">
-          <form>
+          <form @submit.prevent="createPreviousSession" class="needs-validation" novalidate>
+            <!-- :action-row="{ showNow: true }" -->
+            <VueDatePicker v-model="date" required :enable-time-picker="false"  placeholder="Select Date" :max-date="new Date()" :disabled-dates="disabledDates" timezone="UTC" class="mb-3"></VueDatePicker>
             <div class="form-floating">
               <select v-model="createPreviousSessionData.method" class="form-select mb-3" id="floatingSelectInput"
                 aria-label="Select a method">
@@ -74,24 +80,22 @@ async function createPreviousSession(params) {
               <label for="floatingNoteInput">Note:</label>
             </div>
 
+            <!-- <button type="button" class="btn btn-gray text-light">Go Back</button> -->
+            <button type="submit" class="btn btn-success text-light mdi mdi-check w-100"> Mark</button>
 
           </form>
-        </div>
-        <div class="modal-footer d-flex justify-content-between">
-          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-
-          <div class="gap-2 d-flex">
-
-            <!-- <button type="button" class="btn btn-gray text-light">Go Back</button> -->
-            <button @click="createPreviousSession()" type="button" class="btn btn-success text-light">Save
-              changes</button>
           </div>
-        </div>
+          <!-- <div class="modal-footer d-flex justify-content-between">
+
+            
+            <div class="gap-2 d-flex">
+              
+              </div>
+        </div> -->
       </div>
     </div>
   </div>
 
-<VueDatePicker v-model="date"></VueDatePicker>
 </template>
 
 
