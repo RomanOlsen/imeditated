@@ -13,7 +13,7 @@ Most habit trackers I found online are great, but meditation was really the only
 That’s how I led to imeditated.com. It’s my accountability friend for a habit that truly keeps me grounded. </p>
     
     <p>Stay connected to my projects on <a href="https://x.com/RomanOlsenHQ" target="_blank" rel="noopener noreferrer">X</a> or <a href="https://youtube.com/RomanOnFire" target="_blank" rel="noopener noreferrer">YouTube!</a>
-
+      You can also DM me on <a href="https://instagram.com/romanonfire" target="_blank" rel="noopener noreferrer">Instagram</a> if you have questions.
     </p>
 
     <!-- Developers/Employers!

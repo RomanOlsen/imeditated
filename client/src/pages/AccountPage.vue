@@ -25,6 +25,24 @@ async function deleteAccount() {
   }
 }
 
+async function resetData() {
+  try {
+    const confirmed = await Pop.confirm("Are you sure you want to reset your account data?", "This will permanently delete all of your habit data and progress. Your account will remain, and you can start fresh whenever you’re ready.")
+    if (!confirmed) return
+    const confirmed2 = await Pop2.confirm("Last chance!", "",
+    "Cancel",
+    "Confirm")
+    if (confirmed2) return
+    Pop.success("Session data deleted.")
+    await accountService.resetData();
+    // NOTE router.push kick them back to home or about?
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
+
+
 const editableAccountData = ref({
   name: ""
 })
@@ -47,7 +65,7 @@ async function editAccountDetails() {
     <div class="card bg-gray p-5 m-2">
 
 
-      <div class="px-3 py-1">
+      <div class="">
         <!-- <h1>Welcome {{ account.name }}</h1>   -->
         <!-- <img class="rounded" :src="account.picture" alt="" /> -->
         <p>Email: {{ account.email }}</p>
@@ -62,10 +80,10 @@ async function editAccountDetails() {
 
         </form>
         <!-- <button data-bs-toggle="modal" data-bs-target="#editAccountModal"> Edit Account Details </button> -->
-        <button class="btn btn-danger" @click="deleteAccount()"> Delete Account
-        </button>
       </div>
-
+      
+      <button class="btn btn-danger d-flex align-items-end" @click="resetData()"> Reset Data
+      </button>
     </div>
   </div>
   <div v-else>

@@ -9,6 +9,7 @@ export class AccountController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
       .put('', this.editUserAccount)
+      .delete('', this.resetAccountData)
   }
 
   async getUserAccount(req, res, next) {
@@ -27,6 +28,17 @@ export class AccountController extends BaseController {
       const account = await accountService.updateAccount(req.userInfo, req.body)
       res.send(account)
     } catch (error) {
+      next(error)
+    }
+  }
+
+  async resetAccountData(request, response, next){
+    try {
+      const accountId = request.userInfo.id
+      await accountService.resetAccountData(accountId)
+      response.send("Deleted")
+    }
+    catch (error){
       next(error)
     }
   }
