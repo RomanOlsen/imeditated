@@ -38,7 +38,7 @@ watch(theme, () => {
       <!-- <div class="collapse navbar-collapse " id="navbar-links"> -->
       <ul class="navbar-nav d-flex align-items-center gap-2">
           <li>
-            <RouterLink :to="{ name: 'About' }" class="btn text-imeditated selectable">
+            <RouterLink :to="{ name: 'History' }" class="btn text-imeditated selectable">
               History
             </RouterLink>
           </li>
