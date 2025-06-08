@@ -1,12 +1,12 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { AppState } from '../AppState.js';
 import { AuthService } from '../services/AuthService.js';
 import { logger } from '@/utils/Logger.js';
 
 const identity = computed(() => AppState.identity)
 const account = computed(() => AppState.account)
-let failed = false
+let failed = ref(false)
 
 function login() {
   AuthService.loginWithRedirect()
@@ -17,7 +17,7 @@ function logout() {
 
 function usePlaceholderImage() {
   logger.warn('Failed to load user image, using placeholder instead.')
-  failed = true
+  failed.value = true
   document.getElementById("accountPicture").classList.add("d-none");
 }
 
@@ -36,11 +36,11 @@ function usePlaceholderImage() {
           <div v-if="account?.picture || identity?.picture">
             <img id="accountPicture" :src="account?.picture || identity?.picture" alt="account photo" height="40"
               class="user-img" @error="usePlaceholderImage()" />
-
-            <img v-if="failed" src="@/assets/img/basicPFP.jpg"
+              <img v-if="failed" src="@/assets/img/basicPFP.jpg"
               alt="New account photo" height="40" class="user-img" />
-              <!-- <Small v-else>{{ account?.name }}</Small> -->
-               <!-- NOTE we will need to ask Jake and codeworks about this problem. -->
+              <!-- <small class="profileTag">Profile</small>  -->
+              <!-- TODO  -->
+              <!-- NOTE we will need to ask Jake and codeworks about this problem. -->
 
           </div>
           <!-- <div class="text-light"><span>Logged in as {{ account?.name }}</span></div> -->
@@ -78,5 +78,11 @@ function usePlaceholderImage() {
   border-radius: 100px;
   object-fit: cover;
   object-position: center;
+}
+.profileTag{
+  position: absolute;
+  top: 1;
+  bottom: 2;
+  left: 1;
 }
 </style>

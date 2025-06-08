@@ -8,7 +8,7 @@ class AccountService {
   async resetAccountData() {
 
     await api.delete('/account') // since it can be regenerated - this is just to reset the name.
-    await api.
+    AppState.sessions = []
   }
   async editAccountDetails(newAccountData) {
     const response = await api.put('/account', {name: newAccountData.name}) // currently can only update imeditated.com name

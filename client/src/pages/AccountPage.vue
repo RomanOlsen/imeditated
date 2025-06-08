@@ -6,9 +6,12 @@ import { Pop } from '@/utils/Pop.js';
 import { Pop2 } from '@/utils/Pop2.js';
 import SessionCard from '@/components/SessionCard.vue';
 import { accountService } from '@/services/AccountService.js';
+import { useRouter } from 'vue-router';
 
 const account = computed(() => AppState.account)
 // const identity = computed(()=> AppState.identity)
+
+const router = useRouter()
 
 async function deleteAccount() {
   try {
@@ -33,9 +36,11 @@ async function resetData() {
     "Cancel",
     "Confirm")
     if (confirmed2) return
-    Pop.success("Session data deleted.")
-    await accountService.resetData();
+    await accountService.resetAccountData();
     // NOTE router.push kick them back to home or about?
+    await router.push({name: "Home"})
+    // await Pop.success("Session data deleted.")
+    window.location.reload();
   }
   catch (error) {
     Pop.error(error);
