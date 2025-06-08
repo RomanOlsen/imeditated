@@ -118,6 +118,7 @@ class SessionService {
   const mostRecent = new Date(dates[0])
   mostRecent.setHours(0, 0, 0, 0)
 
+  // @ts-ignore
   const daysSinceMostRecent = Math.floor((today - mostRecent) / (1000 * 60 * 60 * 24))
 
   if (daysSinceMostRecent > 1) return 0 // streak broken
@@ -129,6 +130,7 @@ class SessionService {
     const current = new Date(dates[i])
     current.setHours(0, 0, 0, 0)
 
+    // @ts-ignore
     const diff = Math.floor((previous - current) / (1000 * 60 * 60 * 24))
 
     if (diff === 1) {

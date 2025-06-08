@@ -5,6 +5,11 @@ import { api } from './AxiosService.js'
 import { sessionService } from './SessionService.js'
 
 class AccountService {
+  async editAccountDetails(newAccountData) {
+    const response = await api.put('/account', {name: newAccountData.name}) // currently can only update imeditated.com name
+    logger.log(response.data)
+    AppState.account = new Account(response.data)
+  }
   async getAccount() {
     try {
       const res = await api.get('/account')
