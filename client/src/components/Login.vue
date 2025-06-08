@@ -53,11 +53,11 @@ function usePlaceholderImage() {
                 Account Settings
               </div>
             </RouterLink>
-            <!-- <RouterLink :to="{ name: 'History' }">
+            <RouterLink :to="{ name: 'History' }">
               <div class="list-group-item dropdown-item list-group-item-action">
                 History
               </div>
-            </RouterLink> -->
+            </RouterLink>
             <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" @click="logout">
               <i class="mdi mdi-logout"></i>
               logout

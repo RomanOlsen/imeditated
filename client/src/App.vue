@@ -1,4 +1,5 @@
 <script setup>
+import Instruction from './components/Instruction.vue';
 import Navbar from './components/Navbar.vue';
 import { RouterView } from 'vue-router';
 
@@ -9,6 +10,7 @@ import { RouterView } from 'vue-router';
   </header>
   <main>
     <RouterView/>
+    <!-- <Instruction/> -->
   </main>
   <footer class="text-center">
     <Navbar />
