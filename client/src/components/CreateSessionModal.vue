@@ -11,7 +11,15 @@ import confetti from 'canvas-confetti';
 
 const date = ref();
 
-const disabledDates = computed(() => AppState.sessions.map(s => s.localDate));
+// const disabledDates = computed(() => AppState.sessions.map(s => s.localDate));
+const disabledDates = computed(() =>
+  AppState.sessions.map(s => {
+    const [year, month, day] = s.localDate.split('-').map(Number)
+    return new Date(year, month - 1, day) // month is 0-based
+  })
+)
+// chatGPT suggested this. We had to do this because the calendar picker was trying to make the localDate strings date objects.
+
 
 
 const createPreviousSessionData = ref({
@@ -21,15 +29,15 @@ const createPreviousSessionData = ref({
   // localDate: null
 })
 
-async function createPreviousSession(params) {
+async function createPreviousSession() {
   try {
-    // logger.log(disabledDates.value)
-    // await sessionService.createPreviousSession(createPreviousSessionData.value, date.value)
-    // Pop.success("Session added.");
-    // confetti({
-    //   particleCount: 15,
-    //   spread: 360,
-      // origin: { x: 0.5, y: 0.5 }
+    // logger.log(disabledDates.value, "Date:", date.value)
+    await sessionService.createPreviousSession(createPreviousSessionData.value, date.value)
+    Pop.success("Session added.");
+    confetti({
+      particleCount: 15,
+      spread: 360,
+      origin: { x: 0.5, y: 0.5 }
     });
   }
   catch (error) {
@@ -58,7 +66,7 @@ async function createPreviousSession(params) {
           <form @submit.prevent="createPreviousSession()" class="needs-validation" novalidate>
             <!-- :action-row="{ showNow: true }" -->
             <VueDatePicker v-model="date" required :enable-time-picker="false" placeholder="Select Date"
-              :max-date="new Date()" :disabled-dates="disabledDates" timezone="UTC" class="mb-3"></VueDatePicker>
+              :max-date="new Date()" :disabled-dates="disabledDates" class="mb-3"></VueDatePicker>
             <div class="form-floating">
               <select v-model="createPreviousSessionData.method" class="form-select mb-3" id="floatingSelectInput"
                 aria-label="Select a method">
