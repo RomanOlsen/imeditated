@@ -24,11 +24,11 @@ const createPreviousSessionData = ref({
 async function createPreviousSession(params) {
   try {
     // logger.log(disabledDates.value)
-    await sessionService.createPreviousSession(createPreviousSessionData.value, date.value)
-    Pop.success("Session added.");
-    confetti({
-      particleCount: 15,
-      spread: 360,
+    // await sessionService.createPreviousSession(createPreviousSessionData.value, date.value)
+    // Pop.success("Session added.");
+    // confetti({
+    //   particleCount: 15,
+    //   spread: 360,
       // origin: { x: 0.5, y: 0.5 }
     });
   }
@@ -55,7 +55,7 @@ async function createPreviousSession(params) {
 
 
         <div class="modal-body">
-          <form @submit.prevent="createPreviousSession" class="needs-validation" novalidate>
+          <form @submit.prevent="createPreviousSession()" class="needs-validation" novalidate>
             <!-- :action-row="{ showNow: true }" -->
             <VueDatePicker v-model="date" required :enable-time-picker="false" placeholder="Select Date"
               :max-date="new Date()" :disabled-dates="disabledDates" timezone="UTC" class="mb-3"></VueDatePicker>
