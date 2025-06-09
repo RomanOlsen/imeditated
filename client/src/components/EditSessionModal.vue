@@ -36,7 +36,7 @@ async function updateActiveSession() {
   try {
     await sessionService.updateActiveSession(activeSession.value.id, newSessionData.value)
     sessionService.setActiveSession(activeSession.value.id); // refresh active session
-    this.toggleEditMode()
+    toggleEditMode()
     Pop.success("Session updated successfully.");
   }
   catch (error) {
