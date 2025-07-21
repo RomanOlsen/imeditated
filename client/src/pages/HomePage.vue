@@ -90,11 +90,11 @@ async function checkSessionsInAppstate() {
         <!-- </div> -->
       </div>
     </div>
-    <span v-else class="mdi mdi-refresh mdi-spin">Loading</span>
+    <span v-else class="mdi mdi-refresh mdi-spin fs-1"></span>
     <!-- ANCHOR example of the completed state. -->
 
 
-    <div class="text-center fs-5">
+    <div v-if="isLoaded" class="text-center fs-5">
       <div v-if="streak">
         <div>You have meditated for <span class="fw-bold">{{ streak }}</span> days in a row!</div>
         <div>And a total of <span class="fw-bold">{{ sessions.length }}</span> times.</div>
