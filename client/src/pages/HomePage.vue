@@ -15,6 +15,7 @@ const account = computed(() => AppState.account);
 const sessionToday = computed(() => AppState.sessionToday);
 const sessions = computed(() => AppState.sessions);
 const streak = computed(() => AppState.streak);
+const isLoaded = computed(() => AppState.isLoaded);
 
 async function markSession() {
   try {
@@ -75,20 +76,21 @@ async function checkSessionsInAppstate() {
   <div v-if="account && sessionToday !== null"
     class="d-flex justify-content-center align-items-center flex-grow-1 flex-column gap-4">
 
-    <!-- <div v-if="sessionToday === null">Loading...</div> -->
-    <button v-if="!sessionToday" id="markButton" @click="markSession()"
-      class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg  mt-5">Mark
-      complete</button>
-    <div v-else class="text-center">
-      <div>Well done today, {{ account.name }} 🎉</div>
-      <!-- <div class="position-relative"> -->
-      <!-- NOTE delete button - will for now just have the option to remove sessions in account settings page -->
-      <!-- <button class="delete mdi mdi-undo bg-danger"></button> -->
-      <button class="btn selectable-scale btn-success text-light fs-1 shadow btn-lg mt-4" disabled>Completed.
-      </button>
-      <!-- </div> -->
+    <div v-if="isLoaded">
+      <button v-if="!sessionToday" id="markButton" @click="markSession()"
+        class="btn selectable-scale btn-imeditated text-light fs-1 shadow btn-lg  mt-5">Mark
+        complete</button>
+      <div v-else class="text-center">
+        <div>Well done today, {{ account.name }} 🎉</div>
+        <!-- <div class="position-relative"> -->
+        <!-- NOTE delete button - will for now just have the option to remove sessions in account settings page -->
+        <!-- <button class="delete mdi mdi-undo bg-danger"></button> -->
+        <button class="btn selectable-scale btn-success text-light fs-1 shadow btn-lg mt-4" disabled>Completed.
+        </button>
+        <!-- </div> -->
+      </div>
     </div>
-
+    <span v-else class="mdi mdi-refresh mdi-spin">Loading</span>
     <!-- ANCHOR example of the completed state. -->
 
 

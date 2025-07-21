@@ -50,6 +50,7 @@ class SessionService {
 
     // @ts-ignore
     AppState.sessions.sort((a, b) => new Date(b.localDate) - new Date(a.localDate))
+    AppState.isLoaded = true // set loading to false after sessions are loaded
 
   }
 

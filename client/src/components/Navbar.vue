@@ -5,10 +5,6 @@ import Login from './Login.vue';
 
 const theme = ref(loadState('theme') || 'light')
 
-// const isStandalone = computed(() => {
-//   return window.matchMedia('(display-mode: standalone)').matches
-// })
-
 const isStandalone = ref(false)
 
 onMounted(() => {

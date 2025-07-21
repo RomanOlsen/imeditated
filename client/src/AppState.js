@@ -11,5 +11,6 @@ export const AppState = reactive({
   streak: 0,
   activeSession: null, // the session being opened in the editSessionModal
   editMode: false, // true if the edit session modal is open
+  isLoaded: false, // used to show loading spinner
 })
 
