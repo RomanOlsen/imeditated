@@ -93,21 +93,26 @@ async function checkSessionsInAppstate() {
 
 
     <div class="text-center fs-5">
-      <div>You have meditated for <span class="fw-bold">{{ streak }}</span> days in a row!</div>
-      <div>And a total of <span class="fw-bold">{{ sessions.length }}</span> times.</div>
-
+      <div v-if="streak">
+        <div>You have meditated for <span class="fw-bold">{{ streak }}</span> days in a row!</div>
+        <div>And a total of <span class="fw-bold">{{ sessions.length }}</span> times.</div>
+      </div>
+      <div v-else>
+        <div>Ready to begin?</div>
+        <div>Total Sessions: <span class="fw-bold">{{ sessions.length }}</span></div>
+      </div>
     </div>
   </div>
 
   <div v-else class="d-flex align-items-center flex-grow-1 justify-content-center flex-column">
-           <RouterLink :to="{ name: 'About' }" class="btn text-imeditated selectable">
-              About
-            </RouterLink>
+    <RouterLink :to="{ name: 'About' }" class="btn text-imeditated selectable">
+      About
+    </RouterLink>
     <h1 class="d-flex mt-5"> Log in to meditate! <span class="mdi mdi-arrow-bottom-right mt-5"></span></h1>
     <!-- <img class="arrow img-fluid" src="@/assets/img/arrow2.png" alt=""> -->
   </div>
 
-    <!-- <div v-else class="d-flex align-items-center flex-grow-1 justify-content-center">
+  <!-- <div v-else class="d-flex align-items-center flex-grow-1 justify-content-center">
     <h1 class="d-flex "> Log in to meditate!</h1>
     <img class="arrow img-fluid" src="@/assets/img/arrow2.png" alt="">
   </div> -->
