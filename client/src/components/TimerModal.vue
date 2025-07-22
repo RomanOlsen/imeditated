@@ -40,7 +40,7 @@ function startTimer() {
       document.getElementById("doneButton").classList.remove("d-none"); // not sure why but for some reason these 2 buttons work without toggling d-none again
       document.getElementById("closeButton").classList.add("d-none");
 
-      const audio = new Audio('@/assets/completed.mp3'); // ANCHOR SRC might not work
+      const audio = new Audio('src/assets/completed.mp3'); // ANCHOR SRC might not work
       audio.play();
       audioInterval = setInterval(() => {
         audio.play();
