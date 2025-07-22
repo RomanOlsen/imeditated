@@ -15,7 +15,7 @@ const sessions = computed(() => AppState.sessions);
     <div class="row">
       <div class="col-12 d-flex justify-content-between align-items-center mb-3">
         <h1 class="text-imeditated fw-bold">Session History</h1>
-        <button title="Log a past meditation" class="btn btn-imeditated create-recipe fs-1 shadow p-0 text-light"
+        <button title="Log a past meditation" class="btn btn-imeditated fs-1 shadow p-0 text-light"
           data-bs-toggle="modal" data-bs-target="#createSessionModal"><span class="mdi mdi-plus"></span>
 
         </button>

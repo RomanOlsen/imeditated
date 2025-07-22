@@ -63,13 +63,14 @@ class SessionService {
     logger.log('Session Today:', AppState.sessionToday)
     // ai wrote this we'll see how it goes
   }
-  async markSession() {
+  async markSession(duration) {
 
-    const response = await api.post('api/sessions', {localDate: new Date().toLocaleDateString('en-CA')}) // later send a session object or just add more once we begin implementing duration, method, etc. // en-CA for consistency
+    const response = await api.post('api/sessions', {localDate: new Date().toLocaleDateString('en-CA'), duration: duration}) // later send a session object or just add more once we begin implementing duration, method, etc. // en-CA for consistency
     logger.log(response.data)
     AppState.sessions.unshift(new Session(response.data)) // used to be push, but we want it at the top of the list
 
     AppState.streak = this.calculateStreak(AppState.sessions.map(s => s.localDate))
+    AppState.sessionToday = true // set to true since we just marked a session today
 
   }
 // NOTE chatgpt wrote this, so I dont fully understand this part of code yet.

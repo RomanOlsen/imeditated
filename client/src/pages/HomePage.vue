@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import CreateSessionModal from '@/components/CreateSessionModal.vue';
+import TimerModal from '@/components/TimerModal.vue';
 import { sessionService } from '@/services/SessionService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
@@ -26,14 +27,14 @@ async function markSession() {
       // origin: { x: 0.5, y: 0.5 }
     });
 
-    const button = document.getElementById('markButton')
+    // const button = document.getElementById('markButton')
 
-    button.classList.remove('btn-imeditated');
-    button.classList.add('btn-success');
-    button.innerText = 'Completed.';
+    // button.classList.remove('btn-imeditated');
+    // button.classList.add('btn-success');
+    // button.innerText = 'Completed.';
 
-    // @ts-ignore
-    button.disabled = true;
+    // // @ts-ignore
+    // button.disabled = true;
 
 
 
@@ -73,6 +74,9 @@ async function checkSessionsInAppstate() {
   <!-- <p class="lead text-center mb-5">
           A simple meditation timer for your mindfulness practice.
         </p> -->
+  <button v-if="isLoaded && sessionToday == false" data-bs-toggle="modal" data-bs-target="#timerModal" title="Set a timer"
+    class="position-absolute mdi mdi-timer btn btn-imeditated m-2 shadow fs-5 text-light"></button>
+
   <div v-if="account && sessionToday !== null"
     class="d-flex justify-content-center align-items-center flex-grow-1 flex-column gap-4">
 
@@ -130,6 +134,7 @@ async function checkSessionsInAppstate() {
   </div> -->
 
   <CreateSessionModal />
+  <TimerModal />
 </template>
 
 <style scoped lang="scss">

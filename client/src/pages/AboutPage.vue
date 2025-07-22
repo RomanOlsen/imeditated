@@ -14,6 +14,9 @@ That’s how I led to imeditated.com. It’s my accountability friend for a habi
     
     <p>Stay connected to my projects on <a href="https://x.com/RomanOlsenHQ" target="_blank" rel="noopener noreferrer">X</a> or <a href="https://youtube.com/RomanOnFire" target="_blank" rel="noopener noreferrer">YouTube!</a> Reach out if you have any questions or suggestions! (My DMs on X are open)</p>
       <!-- You can also DM me on <a href="https://instagram.com/romanonfire" target="_blank" rel="noopener noreferrer">Instagram</a> if you have questions. -->
+<p>Changelog from 7/22/25:
+  Added a timer option. Use the timer to have it auto-marked when the time is up.
+</p>
 <p>Changelog from 7/21/25:
   Added iOS home screen support and changed default duration to 1 minute.
 </p>
