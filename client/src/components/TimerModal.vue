@@ -3,11 +3,26 @@ import { sessionService } from '@/services/SessionService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
 import confetti from 'canvas-confetti';
+import { onMounted, ref } from 'vue';
 
 
 let value;
 let timer;
 let audioInterval;
+let audio;
+
+const startBtn = ref(null);
+
+onMounted(() => {
+  if (startBtn.value) {
+    startBtn.value.addEventListener('click', () => {
+      logger.log('Start button clicked');
+      // @ts-ignore
+      audio = new Audio(new URL('@/assets/completed.mp3', import.meta.url).href);
+      audio.load(); // "warms it up" for iOS
+    });
+  }
+});
 
 
 function resetModal() {
@@ -40,10 +55,10 @@ function startTimer() {
       document.getElementById("doneButton").classList.remove("d-none"); // not sure why but for some reason these 2 buttons work without toggling d-none again
       document.getElementById("closeButton").classList.add("d-none");
 
-      // @ts-ignore
-      const audio = new Audio(new URL('@/assets/completed.mp3', import.meta.url).href);
       audio.play();
+
       audioInterval = setInterval(() => {
+
         audio.play();
       }, 5000);
 
@@ -110,7 +125,8 @@ async function submitTimedSession() {
             </div>
 
             <!-- <button type="button" class="btn btn-gray text-light">Go Back</button> -->
-            <button type="submit" class="btn btn-imeditated text-light mdi mdi-timer-play w-100">
+            <button ref="startBtn" id="Start" type="submit"
+              class="btn btn-imeditated text-light mdi mdi-timer-play w-100">
               Start </button>
 
           </form>
