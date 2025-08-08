@@ -33,12 +33,12 @@ async function resetData() {
     const confirmed = await Pop.confirm("Are you sure you want to reset your account data?", "This will permanently delete all of your habit data and progress. Your account will remain, and you can start fresh whenever you’re ready.")
     if (!confirmed) return
     const confirmed2 = await Pop2.confirm("Last chance!", "",
-    "Cancel",
-    "Confirm")
+      "Cancel",
+      "Confirm")
     if (confirmed2) return
     await accountService.resetAccountData();
     // NOTE router.push kick them back to home or about?
-    await router.push({name: "Home"})
+    await router.push({ name: "Home" })
     // await Pop.success("Session data deleted.")
     window.location.reload();
   }
@@ -54,11 +54,11 @@ const editableAccountData = ref({
 
 async function editAccountDetails() {
   try {
-    
+
     await accountService.editAccountDetails(editableAccountData.value)
     Pop.success("Name updated!")
   }
-  catch (error){
+  catch (error) {
     Pop.error(error);
   }
 }
@@ -66,7 +66,9 @@ async function editAccountDetails() {
 
 <template>
 
-  <div class="d-flex align-items-center flex-grow-1 justify-content-center" v-if="account">
+
+  <div class="d-flex align-items-center flex-grow-1 justify-content-center flex-column" v-if="account">
+
     <div class="card bg-gray p-5 m-2">
 
 
@@ -79,17 +81,21 @@ async function editAccountDetails() {
         <form @submit.prevent="editAccountDetails()">
 
           <div class="form-floating mb-3">
-            <input v-model="editableAccountData.name" type="text" class="form-control" id="floatingNoteInput" maxlength="100">
+            <input v-model="editableAccountData.name" type="text" class="form-control" id="floatingNoteInput"
+              maxlength="100">
             <label for="floatingNoteInput">Change name:</label>
           </div>
 
         </form>
         <!-- <button data-bs-toggle="modal" data-bs-target="#editAccountModal"> Edit Account Details </button> -->
       </div>
-      
+
       <button class="btn btn-danger d-flex align-items-end" @click="resetData()"> Reset Data
       </button>
     </div>
+    <RouterLink :to="{ name: 'About' }" class="btn text-imeditated selectable">
+      About
+    </RouterLink>
   </div>
   <div v-else>
     <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
