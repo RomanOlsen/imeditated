@@ -4,7 +4,7 @@
 
 <template>
   <div class="about container mt-3">
-    <h1>I meditated.com</h1>
+    <h1>I Meditated</h1>
     <p>Built by Roman Olsen</p>
     <p>I started meditating using apps such as Medito. The guided sessions really grew on me, but as time went on, I
       noticed a problem. I wanted to keep up my “streak” of meditations in their app, as I found daily practice to be
