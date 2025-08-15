@@ -16,7 +16,7 @@
 
       That’s how I led to imeditated.com. It’s my accountability friend for a habit that truly keeps me grounded. </p>
 
-    <p>Watch the <a href="https://youtu.be/Nd5em108ZXk" target="_blank" rel="noopener noreferrer">video</a></p>
+    <p>Watch the <a href="https://youtu.be/Nd5em108ZXk" target="_blank" rel="noopener noreferrer">video.</a></p>
 
     <p>Follow me on <a href="https://x.com/RomanOlsenHQ" target="_blank" rel="noopener noreferrer">X</a> or <a
         href="https://youtube.com/RomanOnFire" target="_blank" rel="noopener noreferrer">YouTube!</a> Reach out if you
