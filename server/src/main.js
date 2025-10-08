@@ -5,6 +5,11 @@ import { Startup } from './Startup.js'
 import { DbConnection } from './db/DbConfig.js'
 import { logger } from './utils/Logger.js'
 
+
+import dotenv from 'dotenv';
+dotenv.config();
+
+
 // create server & socketServer
 const app = express()
 const port = process.env.PORT || 3000
